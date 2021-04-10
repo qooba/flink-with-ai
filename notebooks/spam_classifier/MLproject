@@ -1,0 +1,11 @@
+name: spamclassifier
+
+entry_points:
+  main:
+    parameters:
+      max_features: {type: int, default: 3000}
+    command: "python3 ./spamclassifier/train.py --max_features {max_features}"
+  validate:
+    parameters:
+      data_file: path
+    command: "python validate.py {data_file}"

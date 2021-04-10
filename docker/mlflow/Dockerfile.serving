@@ -1,0 +1,10 @@
+FROM continuumio/miniconda3
+RUN pip install mlflow==1.11.0 cloudpickle==1.6.0 scikit-learn==0.23.2 gevent boto3
+ENV GUNICORN_CMD_ARGS="--timeout 60 -k gevent"
+WORKDIR /opt/mlflow
+ENV PORT=5000
+ENV WORKER_NUMBER=4
+CMD mlflow models serve -m $MODEL -h 0.0.0.0 -p $PORT -w $WORKER_NUMBER --no-conda
+
+#COPY model_dir/model /opt/ml/model
+#CMD mlflow models serve -m /opt/ml/model -h 0.0.0.0 -p $PORT -w $WORKER_NUMBER --no-conda
