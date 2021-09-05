@@ -99,7 +99,7 @@ class FlinkPrintMagics(Magics):
             return
         
         cell = cell.replace('\n',' ')
-        self.st_env.execute_sql(cell)
+        self.st_env.execute_sql(cell).print()
         
     @cell_magic
     def flink_sql_query(self, line, cell):
